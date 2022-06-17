@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class BDCompararPreçoOpenHelper(context : Context?) : SQLiteOpenHelper(context, NOME, null, VERSAO ) {
+class BDCompararPrecoOpenHelper(context : Context?) : SQLiteOpenHelper(context, NOME, null, VERSAO ) {
 
     override fun onCreate(db : SQLiteDatabase){
         requireNotNull(db)
