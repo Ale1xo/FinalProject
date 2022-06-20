@@ -7,7 +7,7 @@ import android.provider.BaseColumns
 
 class TableProdutos(db : SQLiteDatabase) : TabelaBD(db, NAME) {
     override fun cria() {
-        db.execSQL("CREATE TABLE $nome(${BaseColumns._ID}INTEGER PRIMARY KEY AUTOINCRCAMPO_" +
+        db.execSQL("CREATE TABLE $nome(${BaseColumns._ID}INTEGER PRIMARY KEY AUTOINCREMENT" +
                 "$CAMPO_NAME TEXT NOT NULL," +
                 "$IDMARCA INTEGER NOT NULL," +
                 "$PRECO REAL NOT NULL," +
