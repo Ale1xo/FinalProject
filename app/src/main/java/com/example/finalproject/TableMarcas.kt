@@ -6,12 +6,15 @@ import android.provider.BaseColumns
 class TableMarcas(db : SQLiteDatabase) : TabelaBD(db, NAME) {
     override fun cria() {
         db.execSQL("CREATE TABLE $nome(${BaseColumns._ID}INTEGER PRIMARY KEY AUTOINCREMIDLO" +
-                "$IDMARCA INTEGER NOT NULL," +
-                "$NAME TEXT NOT NULL")
+                "$CAMPO_NAME TEXT NOT NULL")
     }
 
     companion object{
-        const val  IDMARCA = "Id"
-        const val NAME = "Marca"
+        const val NAME = "Marcas"
+
+        const val IDMARCA = "$NAME.${BaseColumns._ID}"
+        const val CAMPO_NAME = "Name"
+
+        val TODAS_COLUNAS = arrayOf(IDMARCA, CAMPO_NAME)
     }
 }
