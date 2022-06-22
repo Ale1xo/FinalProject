@@ -4,7 +4,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.provider.BaseColumns
 
-class Avaliacao (var idAvaliacao: Long = -1, var avaliacao: Long, var idProduto: Long ){
+class Avaliacao (var id: Long = -1, var avaliacao: Long, var idProduto: Long ){
     fun toContentValues(): ContentValues {
         val valoresAvaliacao = ContentValues()
         valoresAvaliacao.put(TableAvaliacao.AVALIACAO, avaliacao)
