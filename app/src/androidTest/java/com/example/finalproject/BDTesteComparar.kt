@@ -3,6 +3,7 @@ package com.example.finalproject
 import android.database.sqlite.SQLiteDatabase
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -13,24 +14,27 @@ class BDTesteComparar {
     private fun appContext() =
         InstrumentationRegistry.getInstrumentation().targetContext
 
-    private fun getWritableDatabase():SQLiteDatabase{
+    private fun getWritableDatabase(): SQLiteDatabase {
         val openHelper = BDCompararPrecoOpenHelper(appContext())
-        return  openHelper.writableDatabase
+        return openHelper.writableDatabase
     }
 
+    private fun insereMarca(db: SQLiteDatabase, marca:Marcas){
+        marca.id = TableMarcas(db).insert(marca.toContentValues())
+        assertNotEquals(-1,marca.id)
+    }
     @Before
-    fun apagaBaseDados(){
+    fun apagaBaseDados() {
         appContext().deleteDatabase(BDCompararPrecoOpenHelper.NOME)
     }
 
     @Test
-    fun consegueAbrirBaseDados(){
+    fun consegueAbrirBaseDados() {
         val openHelper = BDCompararPrecoOpenHelper(appContext())
         val db = openHelper.readableDatabase
 
         assertTrue(db.isOpen)
         db.close()
     }
-
 
 }
