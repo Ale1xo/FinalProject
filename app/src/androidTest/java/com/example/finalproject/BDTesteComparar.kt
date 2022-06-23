@@ -13,6 +13,11 @@ class BDTesteComparar {
     private fun appContext() =
         InstrumentationRegistry.getInstrumentation().targetContext
 
+    private fun getWritableDatabase():SQLiteDatabase{
+        val openHelper = BDCompararPrecoOpenHelper(appContext())
+        return  openHelper.writableDatabase
+    }
+
     @Before
     fun apagaBaseDados(){
         appContext().deleteDatabase(BDCompararPrecoOpenHelper.NOME)
@@ -26,4 +31,6 @@ class BDTesteComparar {
         assertTrue(db.isOpen)
         db.close()
     }
+
+
 }
