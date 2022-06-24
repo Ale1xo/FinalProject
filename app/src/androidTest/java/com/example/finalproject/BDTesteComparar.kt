@@ -18,24 +18,24 @@ class BDTesteComparar {
         return openHelper.writableDatabase
     }
 
-    private fun insereMarca(db: SQLiteDatabase, marca:Marcas){
+    private fun insereMarca(db: SQLiteDatabase, marca: Marcas) {
         marca.id = TableMarcas(db).insert(marca.toContentValues())
-        assertNotEquals(-1,marca.id)
+        assertNotEquals(-1, marca.id)
     }
 
-    private fun insereAvaliacao(db: SQLiteDatabase,avaliacao:Avaliacao){
+    private fun insereAvaliacao(db: SQLiteDatabase, avaliacao: Avaliacao) {
         avaliacao.id = TableMarcas(db).insert(avaliacao.toContentValues())
-        assertNotEquals(-1,avaliacao.id)
+        assertNotEquals(-1, avaliacao.id)
     }
 
-    private fun insereProduto(db: SQLiteDatabase,produto:Produtos){
+    private fun insereProduto(db: SQLiteDatabase, produto: Produtos) {
         produto.id = TableProdutos(db).insert(produto.toContentValues())
-        assertNotEquals(-1,produto.id)
+        assertNotEquals(-1, produto.id)
     }
 
-    private fun insereLoja(db: SQLiteDatabase,loja:Loja){
+    private fun insereLoja(db: SQLiteDatabase, loja: Loja) {
         loja.id = TableLoja(db).insert((loja.toContentValues()))
-        assertNotEquals(-1,loja.id)
+        assertNotEquals(-1, loja.id)
     }
 
     @Before
@@ -53,47 +53,65 @@ class BDTesteComparar {
     }
 
     @Test
-    fun consegueInserirMarca(){
+    fun consegueInserirMarca() {
         val db = getWritableDatabase()
-        insereMarca(db,Marcas(1, "Apple"))
+        insereMarca(db, Marcas(1, "Apple"))
 
         db.close()
     }
 
     @Test
-    fun consegueInserirAvaliacao(){
+    fun consegueInserirAvaliacao() {
         val db = getWritableDatabase()
-        insereAvaliacao(db, Avaliacao(-1,8,6))
+        insereAvaliacao(db, Avaliacao(-1, 8, 6))
     }
 
     @Test
-    fun consegueInserirProduto(){
+    fun consegueInserirProduto() {
         val db = getWritableDatabase()
-        insereProduto(db, Produtos(-1,"Iphone",1200,54))
+        insereProduto(db, Produtos(-1, "Iphone", 1200, 54))
     }
 
     @Test
-    fun consegueInserirLoja(){
+    fun consegueInserirLoja() {
         val db = getWritableDatabase()
-        insereLoja(db, Loja(-1,"iStore","Lisboa"))
+        insereLoja(db, Loja(-1, "iStore", "Lisboa"))
     }
 
     @Test
-    fun consegueAlterarMarca(){
+    fun consegueAlterarMarca() {
         val db = getWritableDatabase()
 
-        val marca = Marcas(-1,"Teste")
-        insereMarca(db,marca)
+        val marca = Marcas(-1, "Teste")
+        insereMarca(db, marca)
 
         marca.name = "Samsung"
 
         val registosAlterados = TableMarcas(db).update(
             marca.toContentValues(),
             "${TableMarcas.IDMARCA}=?",
-            arrayOf("${marca.id}"))
+            arrayOf("${marca.id}")
+        )
 
-        assertEquals(1,registosAlterados)
+        assertEquals(1, registosAlterados)
 
+        db.close()
+    }
+
+    @Test
+    fun connsegueEliminarMarca() {
+        val db = getWritableDatabase()
+
+        val marca = Marcas(-1, "Teste")
+        insereMarca(db, marca)
+
+        val registosEliminados = TableMarcas(db).delete(
+            marca.toContentValues(),
+            "${TableMarcas.IDMARCA}=?",
+            arrayOf("${marca.id}")
+        )
+
+        assertEquals(1, registosEliminados)
         db.close()
     }
 }
