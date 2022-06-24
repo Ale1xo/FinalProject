@@ -3,8 +3,7 @@ package com.example.finalproject
 import android.database.sqlite.SQLiteDatabase
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Assert.assertNotEquals
-import org.junit.Assert.assertTrue
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -76,6 +75,25 @@ class BDTesteComparar {
     @Test
     fun consegueInserirLoja(){
         val db = getWritableDatabase()
-        insereLoja(db,Loja(-1,"iStore","Lisboa"))
+        insereLoja(db, Loja(-1,"iStore","Lisboa"))
+    }
+
+    @Test
+    fun consegueAlterarMarca(){
+        val db = getWritableDatabase()
+
+        val marca = Marcas(-1,"Teste")
+        insereMarca(db,marca)
+
+        marca.name = "Samsung"
+
+        val registosAlterados = TableMarcas(db).update(
+            marca.toContentValues(),
+            "${TableMarcas.IDMARCA}=?",
+            arrayOf("${marca.id}"))
+
+        assertEquals(1,registosAlterados)
+
+        db.close()
     }
 }
