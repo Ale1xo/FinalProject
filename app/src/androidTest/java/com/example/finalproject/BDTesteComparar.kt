@@ -23,6 +23,12 @@ class BDTesteComparar {
         marca.id = TableMarcas(db).insert(marca.toContentValues())
         assertNotEquals(-1,marca.id)
     }
+
+    private fun insereAvaliacao(db: SQLiteDatabase,avaliacao:Avaliacao){
+        avaliacao.id = TableMarcas(db).insert(avaliacao.toContentValues())
+        assertNotEquals(-1,avaliacao.id)
+    }
+
     @Before
     fun apagaBaseDados() {
         appContext().deleteDatabase(BDCompararPrecoOpenHelper.NOME)
@@ -37,4 +43,11 @@ class BDTesteComparar {
         db.close()
     }
 
+    @Test
+    fun consegueInserirMarca(){
+        val db = getWritableDatabase()
+        insereMarca(db,Marcas(1, "Apple"))
+
+        db.close()
+    }
 }
