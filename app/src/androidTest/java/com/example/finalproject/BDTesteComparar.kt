@@ -50,4 +50,10 @@ class BDTesteComparar {
 
         db.close()
     }
+
+    @Test
+    fun consegueInserirAvaliacao(){
+        val db = getWritableDatabase()
+        insereAvaliacao(db,Avaliacao(-1,8,6))
+    }
 }
