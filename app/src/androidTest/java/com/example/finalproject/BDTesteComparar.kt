@@ -29,6 +29,12 @@ class BDTesteComparar {
         assertNotEquals(-1,avaliacao.id)
     }
 
+    private fun insereProduto(db: SQLiteDatabase,produto:Produtos){
+        produto.id = TableProdutos(db).insert(produto.toContentValues())
+        assertNotEquals(-1,produto.id)
+    }
+
+
     @Before
     fun apagaBaseDados() {
         appContext().deleteDatabase(BDCompararPrecoOpenHelper.NOME)
@@ -54,6 +60,6 @@ class BDTesteComparar {
     @Test
     fun consegueInserirAvaliacao(){
         val db = getWritableDatabase()
-        insereAvaliacao(db,Avaliacao(-1,8,6))
+        insereAvaliacao(db, Avaliacao(-1,8,6))
     }
 }
