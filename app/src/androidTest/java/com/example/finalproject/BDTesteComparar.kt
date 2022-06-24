@@ -34,6 +34,10 @@ class BDTesteComparar {
         assertNotEquals(-1,produto.id)
     }
 
+    private fun insereLoja(db: SQLiteDatabase,loja:Loja){
+        loja.id = TableLoja(db).insert((loja.toContentValues()))
+        assertNotEquals(-1,loja.id)
+    }
 
     @Before
     fun apagaBaseDados() {
