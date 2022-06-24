@@ -62,4 +62,10 @@ class BDTesteComparar {
         val db = getWritableDatabase()
         insereAvaliacao(db, Avaliacao(-1,8,6))
     }
+
+    @Test
+    fun consegueInserirProduto(){
+        val db = getWritableDatabase()
+        insereProduto(db, Produtos(-1,"Iphone",1200,54))
+    }
 }
