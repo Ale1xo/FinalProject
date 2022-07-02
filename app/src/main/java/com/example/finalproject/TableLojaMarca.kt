@@ -13,7 +13,7 @@ class TableLojaMarca (db:SQLiteDatabase):TabelaBD(db,NAME){
                 "FOREIGN KEY ($IDPRODUTO), " +
                 "REFERENCES ${TableProdutos.NAME}(${BaseColumns._ID})ON DELETE RESTRICT)"+
                 "FOREIGN KEY ($IDMARCA), " +
-                "REFERENCES ${TableMarcas.NAME}(${BaseColumns._ID})ON DELETE RESTRICT)")
+                "REFERENCES ${TableMarcas.NOME}(${BaseColumns._ID})ON DELETE RESTRICT)")
     }
     override fun query(
         columns: Array<String>,
@@ -26,7 +26,7 @@ class TableLojaMarca (db:SQLiteDatabase):TabelaBD(db,NAME){
         val queryBuilder = SQLiteQueryBuilder()
         queryBuilder.tables = "$NAME INNER JOIN ${TableLoja.NAME} ON ${TableLoja.IDLOJA} = $IDLOJA"
         queryBuilder.tables = "$NAME INNER JOIN ${TableProdutos.NAME} ON ${TableProdutos.IDPRODUTO} = $IDPRODUTO"
-        queryBuilder.tables = "$NAME INNER JOIN ${TableMarcas.NAME} ON ${TableMarcas.IDMARCA} = $IDMARCA"
+        queryBuilder.tables = "$NAME INNER JOIN ${TableMarcas.NOME} ON ${TableMarcas.IDMARCA} = $IDMARCA"
 
         return queryBuilder.query(db, columns, selection, selectionArgs, groupBy, having, orderBy)
     }

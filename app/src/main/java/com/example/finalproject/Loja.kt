@@ -4,7 +4,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.provider.BaseColumns
 
-class Loja(var idLoja: Long = -1, var name : String, var localizacao: String) {
+class Loja( var name : String, var localizacao: String,var id: Long = -1) {
 
     fun toContentValues(): ContentValues{
         val valoresLoja = ContentValues()
@@ -23,7 +23,7 @@ class Loja(var idLoja: Long = -1, var name : String, var localizacao: String) {
             val name = cursor.getString(posName)
             val localizacao = cursor.getString(posLocalizacao)
 
-            return Loja(id,name,localizacao)
+            return Loja(name,localizacao,id)
         }
     }
 }

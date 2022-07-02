@@ -7,10 +7,14 @@ import android.provider.BaseColumns
 
 class TableAvaliacao(db : SQLiteDatabase) : TabelaBD(db, NAME) {
     override fun cria() {
-        db.execSQL("CREATE TABLE $nome(${BaseColumns._ID}INTEGER PRIMARY KEY AUTOINCREMENT" +
-                "$AVALIACAO INTEGER NOT NULL)" +
-                "FOREIGN KEY(${PRODUTO_ID}" +
-                "REFERENCES ${TableProdutos.NAME}(${BaseColumns._ID}")
+        db.execSQL("CREATE TABLE $nome(${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                " $AVALIACAO INTEGER NOT NULL," +
+                " $PRODUTO_ID INTEGER NOT NULL, " +
+                " $IDMARCA INTEGER NOT NULL, " +
+                " FOREIGN KEY ($PRODUTO_ID)" +
+                " REFERENCES ${TableProdutos.CAMPO_NAME}(${BaseColumns._ID}) ON DELETE RESTRICT)"+
+                " FOREIGN KEY($IDMARCA)" +
+                " REFERENCES ${TableMarcas.CAMPO_NAME}(${BaseColumns._ID}) ON DELETE RESTRICT")
     }
     override fun query(
         columns: Array<String>,
@@ -29,10 +33,11 @@ class TableAvaliacao(db : SQLiteDatabase) : TabelaBD(db, NAME) {
     companion object{
         const val NAME = "Avaliacao"
 
-        const val IDAVALIACAO = "Id"
+        const val IDAVALIACAO = "$NAME.${BaseColumns._ID}"
         const val AVALIACAO = "Qualificacao"
         const val PRODUTO_ID = "ProdutoId"
+        const val IDMARCA = " MarcaId"
 
-        val TODAS_COLUNAS = arrayOf(IDAVALIACAO, AVALIACAO, PRODUTO_ID)
+        val TODAS_COLUNAS = arrayOf(IDAVALIACAO, AVALIACAO, PRODUTO_ID, IDMARCA)
     }
 }

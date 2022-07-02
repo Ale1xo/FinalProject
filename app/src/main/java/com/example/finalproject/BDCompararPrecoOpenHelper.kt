@@ -15,7 +15,7 @@ class BDCompararPrecoOpenHelper(context : Context?) : SQLiteOpenHelper(context, 
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
-        TODO("Not yet implemented")
+
     }
 
     companion object{
