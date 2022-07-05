@@ -52,5 +52,6 @@ class MenuInicialFragment : Fragment() {
             R.id.action_settings -> true
             else -> false
 
-        }        }
+        }
+}
 
